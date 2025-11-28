@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>Student Marks Table</h3>
+
+<input id="filter" placeholder="Filter by name" onkeyup="show()" />
+<button onclick="sortMarks()">Sort Marks</button>
+
+<table border="1" id="table" cellspacing="0" cellpadding="5">
+  <thead>
+    <tr><th>Name</th><th>Marks</th></tr>
+  </thead>
+  <tbody id="body"></tbody>
+</table>
+
+<script>
+  let data = [
+    { name: "Aditi", marks: 85 },
+    { name: "Rahul", marks: 72 },
+    { name: "Sneha", marks: 91 },
+    { name: "Karan", marks: 66 }
+  ];
+
+  let asc = true;
+
+  function sortMarks() {
+    data.sort((a, b) => asc ? a.marks - b.marks : b.marks - a.marks);
+    asc = !asc;
+    show();
+  }
+
+  function show() {
+    let f = document.getElementById("filter").value.toLowerCase();
+    let rows = "";
+
+    data
+      .filter(s => s.name.toLowerCase().includes(f))
+      .forEach(s => {
+        rows
